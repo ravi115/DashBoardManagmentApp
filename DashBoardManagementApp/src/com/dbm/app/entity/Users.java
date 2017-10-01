@@ -1,7 +1,24 @@
-package com.dbm.app.resquest;
+/*
+ * (c) copyright, 2017 
+ */
+package com.dbm.app.entity;
 
-public class ApplicationRequest {
+import java.io.Serializable;
 
+/**
+ * This is main class of our application.
+ * This is the model class of our application.
+ * 
+ * @author ravi ranjan kumar
+ * @since 2017-10-01
+ *
+ */
+public class Users implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	private String city;

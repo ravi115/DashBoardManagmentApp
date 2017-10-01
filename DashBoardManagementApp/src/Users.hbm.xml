@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="com.dbm.app.entity.Users" table="USER_TABLE">
+      <meta attribute="class-description">
+         This class contains the user detail in student table. 
+      </meta>
+      <id name="id" type="int" column="id">
+         <generator class="native"/>
+      </id>
+      <property name="name" column="user_name" type="string"/>
+      <property name="city" column="user_city" type="string"/>
+   </class>
+</hibernate-mapping>

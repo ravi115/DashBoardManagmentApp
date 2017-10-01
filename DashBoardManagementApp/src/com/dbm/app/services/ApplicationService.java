@@ -1,3 +1,7 @@
+/*
+ * (c) copyright, 2017 
+ * 
+ */
 package com.dbm.app.services;
 
 import javax.ws.rs.DELETE;
@@ -15,16 +19,32 @@ import javax.ws.rs.core.Response;
 import org.apache.log4j.Logger;
 
 import com.dbm.app.business.ApplicationBusiness;
+import com.dbm.app.entity.Users;
 import com.dbm.app.error.ApplicationError;
 import com.dbm.app.exception.ApplicationException;
 import com.dbm.app.response.ApplicationResponse;
-import com.dbm.app.resquest.ApplicationRequest;
 
+/**
+ * This class provides RESTFul API implementation to provide CRUD operation.
+ * 
+ * @author ravi ranjan kumar
+ * @since 2017-10-01
+ *
+ */
 @Path("/resources")
 public class ApplicationService {
 
 	private Logger LOG  = Logger.getLogger(getClass());
 
+	/**
+	 * This method implements GET API of RESTFul web services. this method is  responsible for
+	 * values available in database. it can return values based on some specific criteria.
+	 *  
+	 * @param id serves as primary key in the database for each entry. 
+	 * @param name name of the requested user.
+	 * @param city location of the requested user.
+	 * @return return all possible result.
+	 */
 	@Path("/search")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -35,7 +55,7 @@ public class ApplicationService {
 		ApplicationResponse objApplicationResponse = new ApplicationResponse();
 		LOG.info("request started for : id : " + id + "& name : " + name + " & city : " + city );
 		try{
-			final ApplicationRequest objAppRequest = new ApplicationRequest();
+			final Users objAppRequest = new Users();
 			objAppRequest.setId(id);
 			objAppRequest.setName(name);
 			objAppRequest.setCity(city);
@@ -55,10 +75,17 @@ public class ApplicationService {
 		return Response.ok().status(400).entity(objApplicationResponse).build();
 	}
 
+	/**
+	 * This method implements POST API of RESTFul web services. this method is responsible to save user 
+	 * data into database.
+	 * 
+	 * @param objApplicationRequest user data in object format.
+	 * @return success or any error message in case of failure.
+	 */
 	@Path("/insertdata")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createResource(ApplicationRequest objApplicationRequest ) {
+	public Response createResource(Users objApplicationRequest ) {
 		ApplicationResponse objApplicationResponse = new ApplicationResponse();
 
 		try{
@@ -80,7 +107,15 @@ public class ApplicationService {
 		return Response.ok().status(400).entity(objApplicationResponse).build();
 	}
 
-
+	/**
+	 * This method implements PUT API of RESTFul web services. this method update the existing user name 
+	 * based on some certain criteria and user new values.
+	 * 
+	 * @param id primary key of every user data.
+	 * @param name name of the user, he wants to update.
+	 * @param city city of the user, he wants to update.
+	 * @return success or error message in case of failure.
+	 */
 	@Path("/update")
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
@@ -91,8 +126,8 @@ public class ApplicationService {
 
 		try{
 			LOG.info("Request started for id : " + id + " & name : " + name
-			+ " & city :" + city);
-			final ApplicationRequest objAppRequest = new ApplicationRequest();
+					+ " & city :" + city);
+			final Users objAppRequest = new Users();
 			objAppRequest.setId(id);
 			objAppRequest.setName(name);
 			objAppRequest.setCity(city);
@@ -112,6 +147,15 @@ public class ApplicationService {
 		return Response.ok().status(400).entity(objApplicationResponse).build();
 	}
 
+	/**
+	 * This method implements DELETE API of RESTFul web services. this method is responsible to delete a user 
+	 * details from database for which he queried.
+	 *   
+	 * @param id primary key of the requested data.
+	 * @param name name of the requested user.
+	 * @param city city of the requested user.
+	 * @return success or error message in case of failure.
+	 */
 	@Path("/remove")
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
@@ -123,8 +167,8 @@ public class ApplicationService {
 
 		try{
 			LOG.info("Request started for id : " + id + " & name : " + name
-			+ " & city :" + city);
-			final ApplicationRequest objAppRequest = new ApplicationRequest();
+					+ " & city :" + city);
+			final Users objAppRequest = new Users();
 			objAppRequest.setId(id);
 			objAppRequest.setName(name);
 			objAppRequest.setCity(city);
@@ -142,10 +186,5 @@ public class ApplicationService {
 			return Response.ok().status(200).entity(objApplicationResponse).build();
 		}
 		return Response.ok().status(400).entity(objApplicationResponse).build();
-	}
-	public static void main(String[] args) {
-		ApplicationService obj = new ApplicationService();
-		Response r = obj.getResource(3, "monu", "patna");
-		System.out.println(r.getEntity());
 	}
 }
