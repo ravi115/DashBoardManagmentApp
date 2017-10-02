@@ -102,14 +102,18 @@ public class ApplicationBusiness {
 	public ApplicationResponse deleteQuery(Users objAppRequest ) throws ApplicationException{
 
 		ApplicationResponse objApplicationResponse= null;
-		try{
-			final HQLQueryBuilder objHQLQueryBuilder = new HQLQueryBuilder(objAppRequest, HQLQuery.HQL_DELETE_QUERY);
-			final String query = objHQLQueryBuilder.query();
-			objApplicationResponse = new HibernateEngine().deleteUsers(objAppRequest, query);
-		}catch(Exception e) {
-			LOG.debug("caught Exception : " + e.getLocalizedMessage());
-			throw new ApplicationException(ApplicationError.INTERNAL_ERROR.getErrorCode(), 
-					ApplicationError.INTERNAL_ERROR.getErrorMessage());
+		if(null != objAppRequest && objAppRequest.getId() > 0 ) {
+			try{
+				final HQLQueryBuilder objHQLQueryBuilder = new HQLQueryBuilder(objAppRequest, HQLQuery.HQL_DELETE_QUERY);
+				final String query = objHQLQueryBuilder.query();
+				objApplicationResponse = new HibernateEngine().deleteUsers(objAppRequest, query);
+			}catch(Exception e) {
+				LOG.debug("caught Exception : " + e.getLocalizedMessage());
+				throw new ApplicationException(ApplicationError.INTERNAL_ERROR.getErrorCode(), 
+						ApplicationError.INTERNAL_ERROR.getErrorMessage());
+			}	
+		}else{
+			throw new ApplicationException(ApplicationError.INVALID_INPUT.getErrorCode(), ApplicationError.INVALID_INPUT.getErrorMessage());
 		}
 		return objApplicationResponse;
 	}

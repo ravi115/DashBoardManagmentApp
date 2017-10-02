@@ -133,7 +133,17 @@ function invokeAPI(serverUrl, method, contentType, data, dataType) {
 		data: data,
 		dataType: dataType,
 		async:false,
-		success: function(response) {
+		statusCode: {
+		      400: function (response) {
+		         alert("something went wrong");
+		         return;
+		      },
+		      404: function (response) {
+		    	  alert("something went wrong");
+		    	  return;
+		      }
+		   },
+		   success: function(response) {
 			responseData=response;
 			console.log("received data"+response);
 			console.log("responseData received data"+responseData);
