@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DashBoard Management</title>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/restapi.js"></script>
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+	<select id="elementId">
+	  <option value="id">id</option>
+	  <option value="name">name</option>
+	  <option value="city">city</option>
+	</select>
+		<input type="text" id="searchKey" />
+		<button id="btnSearch">Search</button>
+		
+		<form id="userForm" method="post">
+			<label>Id:</label> <input type="text" id="id" name="id" placeholder=" enter Id" disabled></br> 
+				<label>Name:</label> 
+				<input type="text" id="name" name="name" placeholder=" Enter Name"
+				required=""></br> <label>City:</label> <input type="text"
+				id="city" name="city" placeholder=" Enter city" required=""></br>
+			<input type="submit" id="btnSave" value="submit">
+			<!-- <button id="btnSave">save</button> -->
+			<input type="reset" name="clear" value="reset">
+		</form>
+
+		<table id="itemList">
+			<thead>
+				<tr>
+					<td>Id</td>
+					<td>Name</td>
+					<td>City</td>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+		<p>update the user information</p>
+		<form id="updateForm">
+		<label>Id:</label>
+		<input type="text" id="updateId" name="updateId" placeholder="enter the id" required=""></br>
+		<label>Name:</label>
+		<input type="text" id="updateName" name="updateName" placeholder="enter name" ></br>
+		<label>City:</label>
+		<input type="text" id="updateCity" name="updateCity" placeholder="enter name" ></br>
+		<input type="submit" id="btnUpdate" value="update">
+		<input type="reset" id="" value="clear">
+		</form>
+		<p>delete user information</p>
+		<form id="deleteForm">
+		<label>Delete user with Id:</label>
+		<input type="text" id="deleteId" name="deleteId" placeholder="enter the id" required=""></br>
+		<label>Delete all User with Name:</label>
+		<input type="text" id="deleteName" name="deleteName" placeholder="enter name" ></br>
+		<label>Delete all user with City:</label>
+		<input type="text" id="deleteCity" name="deleteCity" placeholder="enter name" ></br>
+		<input type="submit" id="btnDelete" value="delete">
+		<input type="reset" id="" value="clear">
+		</form>
+</body>
+</html>
