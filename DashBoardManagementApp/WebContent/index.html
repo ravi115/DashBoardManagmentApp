@@ -1,63 +1,181 @@
 <!DOCTYPE html>
-<html>
-<head>
-<title>DashBoard Management</title>
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="js/restapi.js"></script>
-<link rel="stylesheet" href="css/styles.css" />
-</head>
-<body>
-	<select id="elementId">
-	  <option value="id">id</option>
-	  <option value="name">name</option>
-	  <option value="city">city</option>
-	</select>
-		<input type="text" id="searchKey" />
-		<button id="btnSearch">Search</button>
+<html lang="en">
+	<head>
+		<title>DashBoardApp</title>
+		<link rel="SHORTCUT ICON" href="dashboard.ico"/>
+		<link rel="SHORTCUT ICON" href="https://photos.google.com/photo/AF1QipOxX7f-1Wl0VTp3zsMmc-dacvY8OBzayzxA5Ufm"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	
+	<body>
+	
+	<!-- Image and text -->
+	<nav class="navbar navbar-inverse bg-primary">
+	<div class="col-sm-5">
+	  <a class="navbar-brand" href="#">
+		<img src="data-dashboards.png" width="50" height="40" class="d-inline-block align-top" alt="">
+		DashBoard Managament Application
+	  </a>
+	  </div>
+	</nav>
+	
+	<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-7" style="padding:20px">
+			<div class="card">
+				<h3 class="card-header" style="color:DarkViolet ;">Add New User</h3>
+				<div class="card-block">
+					<form class="form-horizontal" id="userForm" Method="POST">
+					  <div class="form-group">
+						<label class="control-label col-sm-2" >Id:</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" id="id" placeholder="Enter Id" disabled>
+						</div>
+					  </div>
+					  <div class="form-group">
+						<label class="control-label col-sm-2" >Name:</label>
+						<div class="col-sm-10"> 
+						  <input type="text" class="form-control" id="name" placeholder="Enter Name" required>
+						</div>
+					  </div>
+					  <div class="form-group">
+						<label class="control-label col-sm-2" >city:</label>
+						<div class="col-sm-10"> 
+						  <input type="text" class="form-control" id="city" placeholder="Enter City" required>
+						</div>
+					  </div>
+					  <div class="form-group"> 
+						<div class="col-sm-offset-2 col-sm-10">
+						  <button type="submit" class="btn btn-primary" id="formBtn" >Submit</button>
+						  <button type="reset" class="btn btn-info">Clear</button> 
+						</div>
+					  </div>
+					</form>
+				</div>
+			</div>
+			<div class="card" style="margin-top:10px">
+				<h3 class="card-header" style="color:Blue;">Update User Information</h3>
+				<div class="card-block">
+					<form class="form-horizontal" id="updateForm" Method="POST">
+					  <div class="form-group">
+						<label class="control-label col-sm-20 col-sm-10" >Id:</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" id="uid" placeholder="Enter Id" required>
+						</div>
+					  </div>
+					  <div class="form-group">
+						<label class="control-label col-sm-20 col-sm-10" >Update User Name:</label>
+						<div class="col-sm-10"> 
+						  <input type="text" class="form-control" id="uname" placeholder="Enter Name" >
+						</div>
+					  </div>
+					  <div class="form-group">
+						<label class="control-label col-sm-20 col-sm-10" >Update User City:</label>
+						<div class="col-sm-10"> 
+						  <input type="text" class="form-control" id="ucity" placeholder="Enter City" >
+						</div>
+					  </div>
+					  <div class="form-group"> 
+						<div class="col-sm-offset-2 col-sm-10">
+						  <button type="submit" class="btn btn-primary" id="updateBtn" >update</button>
+						  <button type="reset" class="btn btn-info">Clear</button> 
+						</div>
+					  </div>
+					</form>
+				</div>
+			</div>
+			<div class="card" style="margin-top:10px">
+				<h3 class="card-header" style="color:IndianRed ;">Delete User Information</h3>
+				<div class="card-block">
+				<form class="form-horizontal" id="deleteForm" Method="POST">
+					<div class="row-sm-offset-2 row-sm-10">
+						<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-primary active">
+								<input type="radio" name="options" id="option1" autocomplete="off" checked> Id
+							</label>
+							<label class="btn btn-primary">
+								<input type="radio" name="options" id="option2" autocomplete="off">Name
+							</label>
+							<label class="btn btn-primary">
+								<input type="radio" name="options" id="option3" autocomplete="off"> City
+							</label>
+						</div>
+						<div class="input-group">
+						
+							<span class="input-group-addon" id="basic-addon1">Input:</span>
+								<input type="text" class="form-control" id="dId" placeholder="enter delete criteria" aria-describedby="basic-addon1">
+						</div>
+						<div style="margin-top:10px;">
+							<button type="submit" class="btn btn-danger" id="deleteBtn" >Delete</button>
+							<button type="reset" class="btn btn-info">Clear</button>
+						</div>
+						<div style="margin-top:10px;">
+							<div class="alert alert-danger" role="alert">
+								<strong>Be Carefull!</strong> deleting user based on name will delete all user entry with this name.
+							</div>
+							<div class="alert alert-danger" role="alert">
+								<strong>Be Carefull!</strong> deleting user based on city will delete all user entry with this city.
+							</div>
+						</div>
+					</div>
+				</form>
+				</div>
+			</div>
+		</div>
 		
-		<form id="userForm" method="post">
-			<label>Id:</label> <input type="text" id="id" name="id" placeholder=" enter Id" disabled></br> 
-				<label>Name:</label> 
-				<input type="text" id="name" name="name" placeholder=" Enter Name"
-				required=""></br> <label>City:</label> <input type="text"
-				id="city" name="city" placeholder=" Enter city" required=""></br>
-			<input type="submit" id="btnSave" value="submit">
-			<!-- <button id="btnSave">save</button> -->
-			<input type="reset" name="clear" value="reset">
-		</form>
-
-		<table id="itemList">
-			<thead>
-				<tr>
-					<td>Id</td>
-					<td>Name</td>
-					<td>City</td>
-				</tr>
-			</thead>
-			<tbody>
-			</tbody>
-		</table>
-		<p>update the user information</p>
-		<form id="updateForm">
-		<label>Id:</label>
-		<input type="text" id="updateId" name="updateId" placeholder="enter the id" required=""></br>
-		<label>Name:</label>
-		<input type="text" id="updateName" name="updateName" placeholder="enter name" ></br>
-		<label>City:</label>
-		<input type="text" id="updateCity" name="updateCity" placeholder="enter name" ></br>
-		<input type="submit" id="btnUpdate" value="update">
-		<input type="reset" id="" value="clear">
-		</form>
-		<p>delete user information</p>
-		<form id="deleteForm">
-		<label>Delete user with Id:</label>
-		<input type="text" id="deleteId" name="deleteId" placeholder="enter the id" required=""></br>
-		<label>Delete all User with Name:</label>
-		<input type="text" id="deleteName" name="deleteName" placeholder="enter name" ></br>
-		<label>Delete all user with City:</label>
-		<input type="text" id="deleteCity" name="deleteCity" placeholder="enter name" ></br>
-		<input type="submit" id="btnDelete" value="delete">
-		<input type="reset" id="" value="clear">
-		</form>
-</body>
+		<div class="col-sm-5" style="padding:20px">
+		<div class="card">
+					<h3 class="card-header" style="color:green;"> Search Users</h3>
+					<div class="card-block">
+					<form class="form-horizontal" id="searchForm" Method="POST">
+					<div class="row-sm-offset-2 row-sm-10">
+						<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-primary active">
+								<input type="radio" name="options" id="option1" autocomplete="off" checked> Id
+							</label>
+							<label class="btn btn-primary">
+								<input type="radio" name="options" id="option2" autocomplete="off">Name
+							</label>
+							<label class="btn btn-primary">
+								<input type="radio" name="options" id="option3" autocomplete="off"> City
+							</label>
+						</div>
+						<div class="input-group">
+						
+							<span class="input-group-addon" id="basic-addon1">Input:</span>
+								<input type="text" class="form-control" id="sId" placeholder="search criteria" aria-describedby="basic-addon1">
+						</div>
+						<div style="margin-top:10px;">
+							<button type="submit" class="btn btn-success" id="searchBtn" >Search</button>
+							<button type="reset" class="btn btn-info">Clear</button>
+						</div>
+						</div>
+					</form>
+					</div>
+				</div>
+			<div class="card" style="margin-top:10px">
+				<h3 class="card-header" style="color:PaleVioletRed ;"> User Information Table</h3>
+				<div>
+					<table class="table table-hover" id="itemList">
+						<thead>
+						  <tr>
+							<th>Id</th>
+							<th>Name</th>
+							<th>City</th>
+						  </tr>
+						</thead>
+						<tbody>   
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		</div>
+		</div>
+		<script src="js/rest.js"></script>
+	</body>
 </html>
