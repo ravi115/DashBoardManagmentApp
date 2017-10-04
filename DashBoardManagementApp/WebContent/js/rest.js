@@ -5,15 +5,15 @@ var rootURL = "http://localhost:8080/DashBoardManagementApp/rest/resources";
 	loadUser();
 	$('#userForm').submit(function() {
 		saveUSer();
-		loadUser();
+		//loadUser();
 	});
 	$('#updateForm').submit(function() {
 		updateUser();
-		loadUser();
+		//loadUser();
 	});
 	$('#deleteForm').submit(function() {
 		deleteUser();
-		loadUser();
+		//loadUser();
 	});
 	$('#searchForm').submit(function() {
 		searchUser();
