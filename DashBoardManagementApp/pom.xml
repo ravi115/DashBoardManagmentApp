@@ -3,8 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>DashBoardManagementApp</groupId>
 	<artifactId>DashBoardManagementApp</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+	<version>1</version>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>

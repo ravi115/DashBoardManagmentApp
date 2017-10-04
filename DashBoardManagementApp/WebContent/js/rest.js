@@ -1,23 +1,18 @@
 var rootURL = "http://localhost:8080/DashBoardManagementApp/rest/resources";
 
+$( document).ready(function() {
 	console.log("ready!");
-	
 	loadUser();
 	$('#userForm').submit(function() {
 		saveUSer();
-		//loadUser();
 	});
 	$('#updateForm').submit(function() {
 		updateUser();
-		//loadUser();
 	});
 	$('#deleteForm').submit(function() {
 		deleteUser();
-		//loadUser();
 	});
-	$('#searchForm').submit(function() {
-		searchUser();
-	});
+});
 
 function loadUser() {
 	console.log("load all user data");
@@ -48,38 +43,33 @@ function updateUser() {
 
 function deleteUser() {
 	console.log("deleteUser is triggered");
-	var val = $('#dId').val();
-	var val = $('#sId').val();
-	var column;
-	if($("#option1").prop("checked", true)) {
-		column="id";
-	}else if ($("#option2").prop("checked", true)) {
-		column="name";
-	}else if ($("#option3").prop("checked", true)) {
-		column="city";
+	var id = $('#did').val();
+	var name = $('#dname').val();
+	var city = $('#dcity').val();
+	var searchColumn;
+	if(id!='') {
+		searchColumn= "id="+id;
 	}
-}
-
-function searchUser() {
-	console.log("searchUser is triggered");
-	var val = $('#sId').val();
-	var column;
-	if($("#option1").prop("checked", true)) {
-		column="id";
-	}else if ($("#option2").prop("checked", true)) {
-		column="name";
-	}else if ($("#option3").prop("checked", true)) {
-		column="city";
+	if(name!= '') {
+		if(id!='') {
+			searchColumn+="&name="+name;
+		}else{
+			searchColumn="name="+name;
+		}
 	}
-	var url = rootURL + '/search?'+column+'='+val;
-	console.log("search url  is : " + url);
-	var response = invokeAPI(url, 'GET', "application/x-www-form-urlencoded; charset=UTF-8", '', 'text');
-	creataTable(response);
+	if(city!='') {
+		if(id!='' && name=='' || name!='' && id=='' || id!='' && name!= '') {
+			searchColumn+="&city="+city;
+		}
+		else{
+			searchColumn="city="+city;
+		}
+	}
+	console.log("delete data is : " + searchColumn);
+	var deleteURL = rootURL+'/remove';
+	invokeAPI(deleteURL, 'DELETE', "application/x-www-form-urlencoded; charset=UTF-8", searchColumn, 'text');
 }
 
-function requestPayLoad(column, val) {
-
-}
 /**
  * this method constructs request payload for update and delete API call.
  * @param Id
@@ -157,11 +147,11 @@ function invokeAPI(serverUrl, method, contentType, data, dataType) {
 		async:false,
 		statusCode: {
 		      400: function (response) {
-		         alert("something went wrong");
+		         alert("Invalid Input");
 		         return;
 		      },
 		      404: function (response) {
-		    	  alert("something went wrong");
+		    	  alert("something went wrong 404");
 		    	  return;
 		      }
 		   },
@@ -175,4 +165,34 @@ function invokeAPI(serverUrl, method, contentType, data, dataType) {
 		}
 	});
 	return responseData;
+}
+
+function doSearch() {
+	console.log("search function called on keypress!");
+    var searchText = document.getElementById('searchTerm').value.toUpperCase();
+    var targetTable = document.getElementById('itemList');
+    var targetTableColCount;
+            
+    //Loop through table rows
+    for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
+        var rowData = '';
+
+        //Get column count from header row
+        if (rowIndex == 0) {
+           targetTableColCount = targetTable.rows.item(rowIndex).cells.length;
+           continue; //do not execute further code for header row.
+        }
+                
+        //Process data rows. (rowIndex >= 1)
+        for (var colIndex = 0; colIndex < targetTableColCount; colIndex++) {
+            rowData += targetTable.rows.item(rowIndex).cells.item(colIndex).innerText.toUpperCase();
+        }
+
+        //If search term is not found in row data
+        //then hide the row, else show
+        if (rowData.indexOf(searchText) == -1)
+            targetTable.rows.item(rowIndex).style.display = 'none';
+        else
+            targetTable.rows.item(rowIndex).style.display = 'table-row';
+    }
 }

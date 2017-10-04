@@ -53,7 +53,7 @@ public class ApplicationService {
 			@DefaultValue("") @QueryParam("city") String city) {
 
 		ApplicationResponse objApplicationResponse = new ApplicationResponse();
-		LOG.info("request started for : id : " + id + "& name : " + name + " & city : " + city );
+		LOG.info("request started for search id : " + id + "& name : " + name + " & city : " + city );
 		try{
 			final Users objAppRequest = new Users();
 			objAppRequest.setId(id);
@@ -89,7 +89,7 @@ public class ApplicationService {
 		ApplicationResponse objApplicationResponse = new ApplicationResponse();
 
 		try{
-			LOG.info("Request started for id : " + objApplicationRequest.getId() + " & name : " + objApplicationRequest.getName()
+			LOG.info("Request started for insert id : " + objApplicationRequest.getId() + " & name : " + objApplicationRequest.getName()
 			+ " & city :" + objApplicationRequest.getCity());
 			objApplicationResponse = new ApplicationBusiness().insertQuery(objApplicationRequest);
 			if(null == objApplicationResponse ) {
@@ -125,7 +125,7 @@ public class ApplicationService {
 		ApplicationResponse objApplicationResponse = new ApplicationResponse();
 
 		try{
-			LOG.info("Request started for id : " + id + " & name : " + name
+			LOG.info("Request started for update id : " + id + " & name : " + name
 					+ " & city :" + city);
 			final Users objAppRequest = new Users();
 			objAppRequest.setId(id);
@@ -166,7 +166,7 @@ public class ApplicationService {
 		ApplicationResponse objApplicationResponse = new ApplicationResponse();
 
 		try{
-			LOG.info("Request started for id : " + id + " & name : " + name
+			LOG.info("Request started for delete id : " + id + " & name : " + name
 					+ " & city :" + city);
 			final Users objAppRequest = new Users();
 			objAppRequest.setId(id);

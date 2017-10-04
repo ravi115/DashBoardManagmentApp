@@ -102,7 +102,7 @@ public class ApplicationBusiness {
 	public ApplicationResponse deleteQuery(Users objAppRequest ) throws ApplicationException{
 
 		ApplicationResponse objApplicationResponse= null;
-		if(null != objAppRequest && objAppRequest.getId() > 0 ) {
+		if(null != objAppRequest /*&& objAppRequest.getId() > 0*/ ) {
 			try{
 				final HQLQueryBuilder objHQLQueryBuilder = new HQLQueryBuilder(objAppRequest, HQLQuery.HQL_DELETE_QUERY);
 				final String query = objHQLQueryBuilder.query();

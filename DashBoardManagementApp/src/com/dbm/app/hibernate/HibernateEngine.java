@@ -107,20 +107,31 @@ public class HibernateEngine extends HibernateProcessorAbstract {
 			if(null != objUser  && null != hqlQuery && hqlQuery.length() > 0) {
 				Query query = session.createQuery(hqlQuery);
 				int nRowDeleted;
+				boolean bIsAnyColumn = false;
 				if(null != query ){
 					if(objUser.getId() > 0 ) {
+						bIsAnyColumn = true;
 						query.setParameter("id", objUser.getId());
 					}
 					if(null != objUser.getName() && objUser.getName().length() > 0 ) {
+						bIsAnyColumn = true;
 						query.setParameter("name", objUser.getName());
 					}
 					if(null != objUser.getCity() && objUser.getCity().length() > 0 ) {
+						bIsAnyColumn = true;
 						query.setParameter("city", objUser.getCity());
 					}
-					nRowDeleted = query.executeUpdate();
-					objResponse.setErrorCode(ApplicationError.SUCCESS.getErrorCode());
-					objResponse.setErrorMessage(ApplicationError.SUCCESS.getErrorMessage());
-					LOG.info("deleted rows : " + nRowDeleted);
+					if(bIsAnyColumn) {
+						nRowDeleted = query.executeUpdate();
+						objResponse.setErrorCode(ApplicationError.SUCCESS.getErrorCode());
+						objResponse.setErrorMessage(ApplicationError.SUCCESS.getErrorMessage());
+						LOG.info("deleted rows : " + nRowDeleted);
+					}else{
+						objResponse.setErrorCode(ApplicationError.INVALID_INPUT.getErrorCode());
+						objResponse.setErrorMessage(ApplicationError.INVALID_INPUT.getErrorMessage());
+						LOG.info("can not delete all the rows : ");
+
+					}
 				}else {
 					LOG.debug("Failed create the query");
 				}
