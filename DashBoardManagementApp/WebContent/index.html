@@ -63,6 +63,9 @@
 						<span class="input-group-addon" id="basic-addon1">City</span>
 							<input type="text" class="form-control" id="ucity" placeholder="Update User City" aria-describedby="basic-addon1">
 						</div>
+						<div id="al" class="alert alert-danger" role="alert" style="margin-top:10px;" align="center">
+								<strong >wrong input</strong>
+						</div>
 					  <div class="form-group"> 
 						<div class="col-sm-offset-2 col-sm-100" style="margin-top:10px;">
 						  <button type="submit" class="btn btn-warning" id="updateBtn" >update</button>
@@ -89,6 +92,9 @@
 						<span class="input-group-addon" id="basic-addon1">City</span>
 							<input type="text" class="form-control" id="dcity" placeholder="Delete User City" aria-describedby="basic-addon1">
 						</div>
+						<div id="al" class="alert alert-info" role="alert" style="margin-top:10px;" align="center">
+								<strong >wrong input</strong>
+						</div>
 						<div style="margin-top:10px;">
 							<button type="submit" class="btn btn-danger" id="deleteBtn" >Delete</button>
 							<button type="reset" class="btn btn-info">Clear</button>
@@ -113,7 +119,7 @@
 					<input type="text" class="form-control" id="searchTerm" placeholder="Search for Id, Name or City" onkeyup="doSearch()">
 				</div>
 				<div>
-					<table class="table table-hover" id="itemList" style="margin-top:10px">
+					<table class="table table-hover" id="itemList" >
 						<thead>
 						  <tr>
 							<th>Id</th>
@@ -128,14 +134,15 @@
 			</div>
 		</div>
 		</div>
-		<nav class="navbar navbar-inverse" style="background-color: #BBDEFB;">
+		</div>
+		
 		<hr class="featurette-divider">
+		<nav class="navbar navbar-inverse" style="background-color:#2DA9F5;margin-top:20px;">
 		<footer style="margin-top:50px;">
 			<p class="float-right" ><a style="color: #212F3D; font-weight: 15px;" href="#">[Back to top]</a></p>
-			<p style="color: #34495E; font-weight: 15px;">© 2017 DashBoard ManagementApp, Inc. · <a style="color: #FF5722;" href="#">Privacy</a> · <a style="color: #FF5722;" href="#">Terms</a></p>
+			<p style="color: #F5F8F9; font-weight: 15px;">Â© 2017 DashBoard ManagementApp, Inc. Â· <a style="color: #F5F8F9;" href="#">Privacy</a> Â· <a style="color: #F5F8F9;" href="#">Terms</a></p>
 		</footer>
 		</nav>
-		</div>
 		<script src="js/rest.js"></script>
 	</body>
 </html>
