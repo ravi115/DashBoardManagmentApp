@@ -6,14 +6,15 @@ loadUser();
 $('#ual').hide();
 $('#dal').hide();
 
-$('#addBtn').bind('click', function(event) {
+$('#userForm').submit(function() {
 		saveUSer();	
 });
 
-$('#updateBtn').bind('click', function(event) {
+$('#updateForm').submit(function() {
 	updateUser();
 });
-$('#deleteBtn').bind('click', function(event) {
+$('#deleteForm').submit(function() {
+	//event.preventDefault();
 	deleteUser();
 });
 
