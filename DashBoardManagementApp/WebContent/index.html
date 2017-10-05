@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>DashBoardApp</title>
+		<title>DashBoardManagementApp</title>
 		<link rel="SHORTCUT ICON" href="dashboard.ico"/>
 		<link rel="SHORTCUT ICON" href="https://photos.google.com/photo/AF1QipOxX7f-1Wl0VTp3zsMmc-dacvY8OBzayzxA5Ufm"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="css/mystyle.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -40,7 +41,7 @@
 						</div>
 					  <div class="form-group" style="margin-top:10px;"> 
 						<div class="col-sm-offset-2 col-sm-100">
-						  <button type="submit" class="btn btn-success" id="formBtn" >Submit</button>
+						  <button type="submit" class="btn btn-success" id="addBtn" >Save User</button>
 						  <button type="reset" class="btn btn-info">Clear</button> 
 						</div>
 					  </div>
@@ -63,7 +64,7 @@
 						<span class="input-group-addon" id="basic-addon1">City</span>
 							<input type="text" class="form-control" id="ucity" placeholder="Update User City" aria-describedby="basic-addon1">
 						</div>
-						<div id="al" class="alert alert-danger" role="alert" style="margin-top:10px;" align="center">
+						<div id="ual" class="alert alert-danger" role="alert" style="margin-top:10px;" align="center">
 								<strong >wrong input</strong>
 						</div>
 					  <div class="form-group"> 
@@ -92,7 +93,7 @@
 						<span class="input-group-addon" id="basic-addon1">City</span>
 							<input type="text" class="form-control" id="dcity" placeholder="Delete User City" aria-describedby="basic-addon1">
 						</div>
-						<div id="al" class="alert alert-info" role="alert" style="margin-top:10px;" align="center">
+						<div id="dal" class="alert alert-info" role="alert" style="margin-top:10px;" align="center">
 								<strong >wrong input</strong>
 						</div>
 						<div style="margin-top:10px;">
@@ -119,17 +120,20 @@
 					<input type="text" class="form-control" id="searchTerm" placeholder="Search for Id, Name or City" onkeyup="doSearch()">
 				</div>
 				<div>
-					<table class="table table-hover" id="itemList" >
-						<thead>
-						  <tr>
-							<th>Id</th>
-							<th>Name</th>
-							<th>City</th>
-						  </tr>
-						</thead>
-						<tbody> 
-						</tbody>
-					</table>
+					<div class="table-custom" id="style-4">
+						<table class="table table-hover" id="itemList" >
+							<thead>
+							  <tr>
+							  	<th>Sr_No.</th>
+								<th>Id</th>
+								<th>Name</th>
+								<th>City</th>
+							  </tr>
+							</thead>
+							<tbody> 
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>

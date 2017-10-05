@@ -1,18 +1,22 @@
 var rootURL = "http://localhost:8080/DashBoardManagementApp/rest/resources";
 
-$( document).ready(function() {
-	console.log("ready!");
-	loadUser();
-	$('#userForm').submit(function() {
-		saveUSer();
-	});
-	$('#updateForm').submit(function() {
-		updateUser();
-	});
-	$('#deleteForm').submit(function() {
-		deleteUser();
-	});
+console.log("ready!");
+loadUser();
+
+$('#ual').hide();
+$('#dal').hide();
+
+$('#addBtn').bind('click', function(event) {
+		saveUSer();	
 });
+
+$('#updateBtn').bind('click', function(event) {
+	updateUser();
+});
+$('#deleteBtn').bind('click', function(event) {
+	deleteUser();
+});
+
 
 function loadUser() {
 	console.log("load all user data");
@@ -27,7 +31,7 @@ function saveUSer() {
 	var city= $('#city').val();
 	var dataJSON = JSON.stringify(formJSONData(name,city));
 	console.log("json data to be sent over server : " + dataJSON);
-	
+
 	var url = rootURL+'/insertdata';
 	invokeAPI(url, 'POST', "application/json; charset=UTF-8", dataJSON, 'json');
 
@@ -38,7 +42,10 @@ function updateUser() {
 
 	var requestData = requestPayLoad($('#uid').val(), $('#uname').val(), $('#ucity').val());
 	var url = rootURL+'/update';
-	invokeAPI(url, 'PUT', "application/x-www-form-urlencoded; charset=UTF-8", requestData, 'text');
+	var statusCode = invokeAPI(url, 'PUT', "application/x-www-form-urlencoded; charset=UTF-8", requestData, 'text');
+	if(statusCode == 400 || statusCode == 404) {
+		$('#ual').show();
+	}	
 }
 
 function deleteUser() {
@@ -67,7 +74,10 @@ function deleteUser() {
 	}
 	console.log("delete data is : " + searchColumn);
 	var deleteURL = rootURL+'/remove';
-	invokeAPI(deleteURL, 'DELETE', "application/x-www-form-urlencoded; charset=UTF-8", searchColumn, 'text');
+	var statusCode = invokeAPI(deleteURL, 'DELETE', "application/x-www-form-urlencoded; charset=UTF-8", searchColumn, 'text');
+	if(statusCode == 400 || statusCode == 404) {
+		$('#dal').show();
+	}
 }
 
 /**
@@ -92,7 +102,7 @@ function requestPayLoad(Id, Name, City) {
 
 
 function formJSONData(name, city) {
-	
+
 	var user = new Object();
 	user.id = 0;
 	user.name = name;
@@ -117,7 +127,7 @@ function creataTable(response) {
 		var j = 0;
 		for(i = 0 ; i< resultJSON.length; i++ ) {
 			var result = resultJSON[i];
-			rows += "<tr class="+ trStyle[j++]+ "><td>" + result.id + "</td><td>" + result.name + "</td><td>" + result.city +  "</td></tr>";
+			rows += "<tr class="+ trStyle[j++]+ ">"+"<td>" + (i+1) + "</td><td>" + result.id + "</td><td>" + result.name + "</td><td>" + result.city +  "</td></tr>";
 			if(j==4){
 				j=0;
 			}
@@ -146,16 +156,14 @@ function invokeAPI(serverUrl, method, contentType, data, dataType) {
 		dataType: dataType,
 		async:false,
 		statusCode: {
-		      400: function (response) {
-		         alert("Invalid Input");
-		         return;
-		      },
-		      404: function (response) {
-		    	  alert("something went wrong 404");
-		    	  return;
-		      }
-		   },
-		   success: function(response) {
+			400: function (response) {
+				return 400;
+			},
+			404: function (response) {
+				return 404;
+			}
+		},
+		success: function(response) {
 			responseData=response;
 			console.log("received data"+response);
 			console.log("responseData received data"+responseData);
@@ -169,30 +177,30 @@ function invokeAPI(serverUrl, method, contentType, data, dataType) {
 
 function doSearch() {
 	console.log("search function called on keypress!");
-    var searchText = document.getElementById('searchTerm').value.toUpperCase();
-    var targetTable = document.getElementById('itemList');
-    var targetTableColCount;
-            
-    //Loop through table rows
-    for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
-        var rowData = '';
+	var searchText = document.getElementById('searchTerm').value.toUpperCase();
+	var targetTable = document.getElementById('itemList');
+	var targetTableColCount;
 
-        //Get column count from header row
-        if (rowIndex == 0) {
-           targetTableColCount = targetTable.rows.item(rowIndex).cells.length;
-           continue; //do not execute further code for header row.
-        }
-                
-        //Process data rows. (rowIndex >= 1)
-        for (var colIndex = 0; colIndex < targetTableColCount; colIndex++) {
-            rowData += targetTable.rows.item(rowIndex).cells.item(colIndex).innerText.toUpperCase();
-        }
+	//Loop through table rows
+	for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
+		var rowData = '';
 
-        //If search term is not found in row data
-        //then hide the row, else show
-        if (rowData.indexOf(searchText) == -1)
-            targetTable.rows.item(rowIndex).style.display = 'none';
-        else
-            targetTable.rows.item(rowIndex).style.display = 'table-row';
-    }
+		//Get column count from header row
+		if (rowIndex == 0) {
+			targetTableColCount = targetTable.rows.item(rowIndex).cells.length;
+			continue; //do not execute further code for header row.
+		}
+
+		//Process data rows. (rowIndex >= 1)
+		for (var colIndex = 0; colIndex < targetTableColCount; colIndex++) {
+			rowData += targetTable.rows.item(rowIndex).cells.item(colIndex).innerText.toUpperCase();
+		}
+
+		//If search term is not found in row data
+		//then hide the row, else show
+		if (rowData.indexOf(searchText) == -1)
+			targetTable.rows.item(rowIndex).style.display = 'none';
+		else
+			targetTable.rows.item(rowIndex).style.display = 'table-row';
+	}
 }
