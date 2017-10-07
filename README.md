@@ -99,7 +99,8 @@ To update existing user details.
 ```diff
 http://localhost:8080/DashBoardManagementApp/rest/resources/update
 
-with form message Body
+with message Body
+
 id: 1 (manadatory field)
 name : ravi ranjan (optional)
 description: i love singing. (optional)
@@ -110,7 +111,8 @@ To update existing user details.
 ```diff
 http://localhost:8080/DashBoardManagementApp/rest/resources/remove
 
-with form message Body
+with message Body
+
 id: 1 (optional)
 name : ravi ranjan (optional)
 description: i love singing. (optional)
