@@ -29,20 +29,16 @@ for **_frontend development_**
 +before running the application we have to create a database called dashboard in mySQL.
 ```
 1. if you want to use different database which already exist for you then change the database name in hibernate.cfg.xml file [click here](https://github.com/ravi115/DashBoardManagmentApp/blob/master/DashBoardManagementApp/src/hibernate.cfg.xml).
-update this property
+update below property in hibernate.cfg.cml file.
 ```diff
 <property name="connection.url">jdbc:mysql://localhost:3306/dashboard-name</property>
 ```
-in hibernate.cfg.cml file.
-
-2. in order to make successfull database connection with our application, we require database credentials. in this application the database credential is 
-
+2. in order to make successfull database connection with this application, we require database credentials. in this application the below database credential is used 
 ```diff 
-+username = root & password = root
+- username = root & password = root
 ```
-
 so if you want to add your credential, you can add in hibernate.cfg.xml file [click here](https://github.com/ravi115/DashBoardManagmentApp/blob/master/DashBoardManagementApp/src/hibernate.cfg.xml). 
-update this property with your credentials: - 
+update the below property with your credentials: - 
 ```diff 
  <property name="connection.username">root</property>
  <property name="connection.password">root</property>
