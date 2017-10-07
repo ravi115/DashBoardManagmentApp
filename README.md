@@ -55,7 +55,7 @@ update the below property with your credentials: -
 
 **NOTE: -**
 1. _in this case **your credential should be same with the credential used in this application** and also **database name should be same**._
-2. _before testing this application, **a internet connection must be required to see effect of bootstrap and jQuery features**_.
+2. _before testing this application, **an internet connection must be required to see effect of bootstrap and jQuery features**_.
 3. the _UI of this application is tested on_ **google chrome only**. so make sure **this application should be tested on the chrome browser only**. 
 
 ### To test API of this application follow these below steps. 
