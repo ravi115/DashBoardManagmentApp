@@ -25,7 +25,7 @@
 	
 	<div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-7" style="padding:20px">
+		<div class="col-sm-5" style="padding:20px">
 			<div class="card">
 				<h3 class="card-header" style="color:#51C709 ;">Add New User</h3>
 				<div class="card-block">
@@ -35,12 +35,12 @@
 								<input type="text" class="form-control" id="name" placeholder="Enter Name" aria-describedby="basic-addon1" required>
 						</div>
 						<div class="input-group" style="margin-top:10px;">
-							<span class="input-group-addon" id="basic-addon1">City</span>
-								<input type="text" class="form-control" id="city" placeholder="Enter City" aria-describedby="basic-addon1" required>
+							<span class="input-group-addon" id="basic-addon1">Description</span>
+								<input type="text" class="form-control" id="desc" placeholder="Enter Description" aria-describedby="basic-addon1" required>
 						</div>
 					  <div class="form-group" style="margin-top:10px;"> 
 						<div class="col-sm-offset-2 col-sm-100">
-						  <button type="submit" class="btn btn-success" id="addBtn" >Save User</button>
+						  <button type="submit" class="btn btn-success" id="addBtn" >Save</button>
 						  <button type="reset" class="btn btn-info">Clear</button> 
 						</div>
 					  </div>
@@ -60,8 +60,8 @@
 							<input type="text" class="form-control" id="uname" placeholder="Update User Name" aria-describedby="basic-addon1">
 						</div>
 					  <div class="input-group" style="margin-top:10px;">
-						<span class="input-group-addon" id="basic-addon1">City</span>
-							<input type="text" class="form-control" id="ucity" placeholder="Update User City" aria-describedby="basic-addon1">
+						<span class="input-group-addon" id="basic-addon1">Description</span>
+							<input type="text" class="form-control" id="udesc" placeholder="Update User Description" aria-describedby="basic-addon1">
 						</div>
 					  <div class="form-group"> 
 						<div class="col-sm-offset-2 col-sm-100" style="margin-top:10px;">
@@ -86,8 +86,8 @@
 							<input type="text" class="form-control" id="dname" placeholder="Delete User Name" aria-describedby="basic-addon1">
 						</div>
 					  <div class="input-group" style="margin-top:10px;">
-						<span class="input-group-addon" id="basic-addon1">City</span>
-							<input type="text" class="form-control" id="dcity" placeholder="Delete User City" aria-describedby="basic-addon1">
+						<span class="input-group-addon" id="basic-addon1">Description</span>
+							<input type="text" class="form-control" id="ddesc" placeholder="Delete User Description" aria-describedby="basic-addon1">
 						</div>
 						<div style="margin-top:10px;">
 							<button type="submit" class="btn btn-danger" id="deleteBtn" >Delete</button>
@@ -98,7 +98,7 @@
 								<strong>Be Carefull!</strong> deleting user based on name will delete all user entry with this name.
 							</div>
 							<div class="alert alert-danger" role="alert">
-								<strong>Be Carefull!</strong> deleting user based on city will delete all user entry with this city.
+								<strong>Be Carefull!</strong> deleting user based on description will delete all user entry with this description.
 							</div>
 						</div>
 				</form>
@@ -106,11 +106,11 @@
 			</div>
 		</div>
 		
-		<div class="col-sm-5" style="padding:20px">
+		<div class="col-sm-7" style="padding:20px">
 			<div class="card" style="margin-top:10px;">
 				<h3 class="card-header" style="color:PaleVioletRed ;"> User Information Table</h3>
 				<div class="input-group" style="margin-top:10px;">
-					<input type="text" class="form-control" id="searchTerm" placeholder="Search for Id, Name or City" onkeyup="doSearch()">
+					<input type="text" class="form-control" id="searchTerm" placeholder="Search for Id, Name, Description or Date..." onkeyup="doSearch()">
 				</div>
 				<div>
 					<div class="table-custom" id="style-4">
@@ -120,10 +120,12 @@
 							  	<th>Sr_No.</th>
 								<th>Id</th>
 								<th>Name</th>
-								<th>City</th>
+								<th>Description</th>
+								<th>Create Date</th>
+								<th>Update Date</th>
 							  </tr>
 							</thead>
-							<tbody> 
+							<tbody style="font-weight: bold; color: white;"> 
 							</tbody>
 						</table>
 					</div>

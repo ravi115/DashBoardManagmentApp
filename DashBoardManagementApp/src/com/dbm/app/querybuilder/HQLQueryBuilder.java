@@ -56,17 +56,17 @@ public class HQLQueryBuilder {
 					}
 					bIsNamePresent = true;
 				}
-				if(null != user.getCity() && user.getCity().length() > 0 ) {
+				if(null != user.getDescription() && user.getDescription().length() > 0 ) {
 
 					if(bIsIdPresent) {
 						query.append(ApplicationConstant.SPACE).append(ApplicationConstant.AND).append(ApplicationConstant.SPACE)
-								.append(HQLQuery.CITY_COLUMN);
+								.append(HQLQuery.DESC_COLUMN);
 					}else if(bIsNamePresent) {
 						query.append(ApplicationConstant.SPACE).append(ApplicationConstant.AND).append(ApplicationConstant.SPACE)
-								.append(HQLQuery.CITY_COLUMN);
+								.append(HQLQuery.DESC_COLUMN);
 					}else {
 						query.append(ApplicationConstant.SPACE).append(ApplicationConstant.WHERE).append(ApplicationConstant.SPACE)
-								.append(HQLQuery.CITY_COLUMN);
+								.append(HQLQuery.DESC_COLUMN);
 					}
 				}
 			}

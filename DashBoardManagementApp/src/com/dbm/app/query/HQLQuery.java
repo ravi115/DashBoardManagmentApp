@@ -19,7 +19,7 @@ public class HQLQuery {
 	//public static final String WHERE_CLOUSE_ALL_COLUMN = "where id = :id and user_name= :name and user_city= :city";
 	public static final String ID_COLUMN =   " id = :id ";
 	public static final String NAME_COLUMN = " user_name= :name ";
-	public static final String CITY_COLUMN = " user_city= :city ";
+	public static final String DESC_COLUMN = " user_description= :description ";
 	public static final String HQL_SELECT_QUERY = "FROM" + TABLE_NAME;
 	public static final String HQL_DELETE_QUERY = "DELETE FROM" + TABLE_NAME; 
 

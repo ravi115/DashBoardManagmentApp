@@ -12,6 +12,8 @@
          <generator class="native"/>
       </id>
       <property name="name" column="user_name" type="string"/>
-      <property name="city" column="user_city" type="string"/>
+      <property name="description" column="user_description" type="string"/>
+      <property name="dateCreated" column="user_created_date" type="string"/>
+      <property name="dateUpdated" column="user_updated_date" type="string"/>
    </class>
 </hibernate-mapping>

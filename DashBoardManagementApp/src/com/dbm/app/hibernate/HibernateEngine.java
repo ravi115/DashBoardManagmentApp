@@ -3,7 +3,11 @@
  */
 package com.dbm.app.hibernate;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
@@ -36,7 +40,9 @@ public class HibernateEngine extends HibernateProcessorAbstract {
 		final ApplicationResponse objResponse = new ApplicationResponse();
 		try{
 			if((null != objUser) && (null != objUser.getName()) && (objUser.getName().length() > 0) && 
-					(null != objUser.getCity()) && (objUser.getCity().length() > 0) ) {
+					(null != objUser.getDescription()) && (objUser.getDescription().length() > 0) ) {
+				//add user created date.
+				objUser.setDateCreated(getCurrentTimeStampe());
 				if( null != session.save(objUser) ) {
 					objResponse.setErrorCode(ApplicationError.SUCCESS.getErrorCode());
 					objResponse.setErrorMessage(ApplicationError.SUCCESS.getErrorMessage());
@@ -68,11 +74,13 @@ public class HibernateEngine extends HibernateProcessorAbstract {
 			if(null != objUser && objUser.getId() > 0 ) {
 				Users user = (Users) session.get(Users.class, objUser.getId());
 				if(null != user ) {
+					//add date to user
+					user.setDateUpdated(getCurrentTimeStampe());
 					if(null != objUser.getName() && objUser.getName().length() > 0 ) {
 						user.setName(objUser.getName());
 					}
-					if(null != objUser.getCity() && objUser.getCity().length() > 0 ) {
-						user.setCity(objUser.getCity());
+					if(null != objUser.getDescription() && objUser.getDescription().length() > 0 ) {
+						user.setDescription(objUser.getDescription());
 					}
 				}
 				if(null != session.save(user) ) {
@@ -117,9 +125,9 @@ public class HibernateEngine extends HibernateProcessorAbstract {
 						bIsAnyColumn = true;
 						query.setParameter("name", objUser.getName());
 					}
-					if(null != objUser.getCity() && objUser.getCity().length() > 0 ) {
+					if(null != objUser.getDescription() && objUser.getDescription().length() > 0 ) {
 						bIsAnyColumn = true;
-						query.setParameter("city", objUser.getCity());
+						query.setParameter("description", objUser.getDescription());
 					}
 					if(bIsAnyColumn) {
 						nRowDeleted = query.executeUpdate();
@@ -169,8 +177,8 @@ public class HibernateEngine extends HibernateProcessorAbstract {
 					if(null != objUser.getName() && objUser.getName().length() > 0 ) {
 						query.setParameter("name", objUser.getName());
 					}
-					if(null != objUser.getCity() && objUser.getCity().length() > 0 ) {
-						query.setParameter("city", objUser.getCity());
+					if(null != objUser.getDescription() && objUser.getDescription().length() > 0 ) {
+						query.setParameter("description", objUser.getDescription());
 					}
 					List<Users> userList = query.list(); 
 					objResponse.setErrorCode(ApplicationError.SUCCESS.getErrorCode());
@@ -193,5 +201,23 @@ public class HibernateEngine extends HibernateProcessorAbstract {
 			//shutdown();
 		}
 		return objResponse;
+	}
+	private String getCurrentTimeStampe() throws ApplicationException {
+
+		String currentDate = null;
+		try{
+			Calendar cal = new GregorianCalendar();
+			TimeZone timeZone = TimeZone.getTimeZone("UTC");
+			cal.setTimeZone(timeZone);
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-YYYY");
+			simpleDateFormat.setTimeZone(timeZone);
+			currentDate = simpleDateFormat.format(cal.getTime());
+
+		}catch(Exception e) {
+			LOG.debug("caught Exception : " + e.getLocalizedMessage());
+			throw new ApplicationException(ApplicationError.DATE_ERROR.getErrorCode(), 
+					ApplicationError.DATE_ERROR.getErrorMessage());
+		}
+		return currentDate;
 	}
 }

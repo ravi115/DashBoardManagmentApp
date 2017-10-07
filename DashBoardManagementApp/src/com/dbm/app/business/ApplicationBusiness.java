@@ -117,6 +117,4 @@ public class ApplicationBusiness {
 		}
 		return objApplicationResponse;
 	}
-
-
 }

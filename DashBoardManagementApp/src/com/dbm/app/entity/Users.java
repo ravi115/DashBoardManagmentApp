@@ -21,7 +21,9 @@ public class Users implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
-	private String city;
+	private String description;
+	private String dateCreated;
+	private String dateUpdated;
 	public int getId() {
 		return id;
 	}
@@ -34,12 +36,22 @@ public class Users implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCity() {
-		return city;
+	public String getDescription() {
+		return description;
 	}
-	public void setCity(String city) {
-		this.city = city;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-
-
+	public String getDateCreated() {
+		return dateCreated;
+	}
+	public void setDateCreated(String dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+	public String getDateUpdated() {
+		return dateUpdated;
+	}
+	public void setDateUpdated(String dateUpdated) {
+		this.dateUpdated = dateUpdated;
+	}
 }

@@ -42,7 +42,7 @@ public class ApplicationService {
 	 *  
 	 * @param id serves as primary key in the database for each entry. 
 	 * @param name name of the requested user.
-	 * @param city location of the requested user.
+	 * @param description location of the requested user.
 	 * @return return all possible result.
 	 */
 	@Path("/search")
@@ -50,15 +50,15 @@ public class ApplicationService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getResource(@QueryParam("id") int id,
 			@DefaultValue("") @QueryParam("name") String name,
-			@DefaultValue("") @QueryParam("city") String city) {
+			@DefaultValue("") @QueryParam("description") String description) {
 
 		ApplicationResponse objApplicationResponse = new ApplicationResponse();
-		LOG.info("request started for search id : " + id + "& name : " + name + " & city : " + city );
+		LOG.info("request started for search id : " + id + "& name : " + name + " & description : " + description );
 		try{
 			final Users objAppRequest = new Users();
 			objAppRequest.setId(id);
 			objAppRequest.setName(name);
-			objAppRequest.setCity(city);
+			objAppRequest.setDescription(description);
 			objApplicationResponse = new ApplicationBusiness().getResult(objAppRequest);
 			if(null == objApplicationResponse ) {
 				throw new ApplicationException(ApplicationError.INTERNAL_ERROR.getErrorCode(), 
@@ -90,7 +90,7 @@ public class ApplicationService {
 
 		try{
 			LOG.info("Request started for insert id : " + objApplicationRequest.getId() + " & name : " + objApplicationRequest.getName()
-			+ " & city :" + objApplicationRequest.getCity());
+			+ " & description :" + objApplicationRequest.getDescription());
 			objApplicationResponse = new ApplicationBusiness().insertQuery(objApplicationRequest);
 			if(null == objApplicationResponse ) {
 				throw new ApplicationException(ApplicationError.INTERNAL_ERROR.getErrorCode(), 
@@ -113,7 +113,7 @@ public class ApplicationService {
 	 * 
 	 * @param id primary key of every user data.
 	 * @param name name of the user, he wants to update.
-	 * @param city city of the user, he wants to update.
+	 * @param description city of the user, he wants to update.
 	 * @return success or error message in case of failure.
 	 */
 	@Path("/update")
@@ -121,16 +121,16 @@ public class ApplicationService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateResource(@FormParam("id") int id,
 			@DefaultValue("") @FormParam("name") String name,
-			@DefaultValue("") @FormParam("city") String city) {
+			@DefaultValue("") @FormParam("description") String description) {
 		ApplicationResponse objApplicationResponse = new ApplicationResponse();
 
 		try{
 			LOG.info("Request started for update id : " + id + " & name : " + name
-					+ " & city :" + city);
+					+ " & description :" + description);
 			final Users objAppRequest = new Users();
 			objAppRequest.setId(id);
 			objAppRequest.setName(name);
-			objAppRequest.setCity(city);
+			objAppRequest.setDescription(description);
 			objApplicationResponse = new ApplicationBusiness().updateQuery(objAppRequest);
 			if(null == objApplicationResponse ) {
 				throw new ApplicationException(ApplicationError.INTERNAL_ERROR.getErrorCode(), 
@@ -153,7 +153,7 @@ public class ApplicationService {
 	 *   
 	 * @param id primary key of the requested data.
 	 * @param name name of the requested user.
-	 * @param city city of the requested user.
+	 * @param description city of the requested user.
 	 * @return success or error message in case of failure.
 	 */
 	@Path("/remove")
@@ -161,17 +161,17 @@ public class ApplicationService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteResource(@FormParam("id") int id,
 			@DefaultValue("") @FormParam("name") String name,
-			@DefaultValue("") @FormParam("city") String city ) {
+			@DefaultValue("") @FormParam("description") String description ) {
 
 		ApplicationResponse objApplicationResponse = new ApplicationResponse();
 
 		try{
 			LOG.info("Request started for delete id : " + id + " & name : " + name
-					+ " & city :" + city);
+					+ " & description :" + description);
 			final Users objAppRequest = new Users();
 			objAppRequest.setId(id);
 			objAppRequest.setName(name);
-			objAppRequest.setCity(city);
+			objAppRequest.setDescription(description);
 			objApplicationResponse = new ApplicationBusiness().deleteQuery(objAppRequest);
 			if(null == objApplicationResponse ) {
 				throw new ApplicationException(ApplicationError.INTERNAL_ERROR.getErrorCode(), 
@@ -186,5 +186,11 @@ public class ApplicationService {
 			return Response.ok().status(200).entity(objApplicationResponse).build();
 		}
 		return Response.ok().status(400).entity(objApplicationResponse).build();
+	}
+	
+	public static void main(String[] args) {
+		ApplicationService service = new ApplicationService();
+		Response response = service.getResource(1, "", "");
+		System.out.println(response.getEntity());
 	}
 }

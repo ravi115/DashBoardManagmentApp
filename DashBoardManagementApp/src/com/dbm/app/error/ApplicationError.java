@@ -4,7 +4,8 @@
 package com.dbm.app.error;
 
 /**
- * This ENUM class provides all kind exception constant. 
+ * This ENUM class provides all kind exception constant.
+ * 
  * @author ravi ranjan kumar
  * @since 2017-10-01
  *
@@ -17,7 +18,8 @@ public enum ApplicationError {
 							"Falied to load XML config file"), Query_Build_ERROR(8,
 									"Falied to build the query"), DATA_EXISTS(9,
 											"data already exists for this id"), Hibernate_Exception(10,
-													"hibernate exception");
+													"hibernate exception"), DATE_ERROR(11,
+															"date is not getting created");
 
 	private int errorCode;
 	private String errorMessage;

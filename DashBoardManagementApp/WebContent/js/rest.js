@@ -28,8 +28,8 @@ function loadUser() {
 function saveUSer() {
 	console.log("saveUSer is triggered");
 	var name= $('#name').val();
-	var city= $('#city').val();
-	var dataJSON = JSON.stringify(formJSONData(name,city));
+	var description= $('#desc').val();
+	var dataJSON = JSON.stringify(formJSONData(name,description));
 	console.log("json data to be sent over server : " + dataJSON);
 
 	var url = rootURL+'/insertdata';
@@ -40,7 +40,7 @@ function saveUSer() {
 function updateUser() {
 	console.log("updateUser is triggered");
 
-	var requestData = requestPayLoad($('#uid').val(), $('#uname').val(), $('#ucity').val());
+	var requestData = requestPayLoad($('#uid').val(), $('#uname').val(), $('#udesc').val());
 	var url = rootURL+'/update';
 	invokeAPI(url, 'PUT', "application/x-www-form-urlencoded; charset=UTF-8", requestData, 'text');
 }
@@ -49,7 +49,7 @@ function deleteUser() {
 	console.log("deleteUser is triggered");
 	var id = $('#did').val();
 	var name = $('#dname').val();
-	var city = $('#dcity').val();
+	var description = $('#ddesc').val();
 	var searchColumn;
 	if(id!='') {
 		searchColumn= "id="+id;
@@ -61,12 +61,12 @@ function deleteUser() {
 			searchColumn="name="+name;
 		}
 	}
-	if(city!='') {
+	if(description!='') {
 		if(id!='' && name=='' || name!='' && id=='' || id!='' && name!= '') {
-			searchColumn+="&city="+city;
+			searchColumn+="&description="+description;
 		}
 		else{
-			searchColumn="city="+city;
+			searchColumn="description="+description;
 		}
 	}
 	console.log("delete data is : " + searchColumn);
@@ -88,19 +88,19 @@ function requestPayLoad(Id, Name, City) {
 		requestData = requestData + '&name='+Name;
 	}
 	if(City != '') {
-		requestData = requestData + '&city='+City;
+		requestData = requestData + '&description='+City;
 	}
 	console.log("request payload is : " + requestData);
 	return requestData;
 }
 
 
-function formJSONData(name, city) {
+function formJSONData(name, description) {
 
 	var user = new Object();
 	user.id = 0;
 	user.name = name;
-	user.city = city;
+	user.description = description;
 	return user;
 }
 /**
@@ -121,7 +121,7 @@ function creataTable(response) {
 		var j = 0;
 		for(i = 0 ; i< resultJSON.length; i++ ) {
 			var result = resultJSON[i];
-			rows += "<tr class="+ trStyle[j++]+ ">"+"<td>" + (i+1) + "</td><td>" + result.id + "</td><td>" + result.name + "</td><td>" + result.city +  "</td></tr>";
+			rows += "<tr class="+ trStyle[j++]+ ">"+"<td>" + (i+1) + "</td><td>" + result.id + "</td><td>" + result.name + "</td><td>" + result.description + "</td><td>" + result.dateCreated + "</td><td>" + result.dateUpdated +  "</td></tr>" ;
 			if(j==4){
 				j=0;
 			}
