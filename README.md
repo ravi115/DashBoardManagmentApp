@@ -13,6 +13,7 @@ for **_backend developement_**
 
 for **_frontend development_**
 - HTML5
+- CSS3
 - BootStrap 4.0.0-alpha.6
 - jQuery 3.2.1-jquery.min.js
 - javaScript
