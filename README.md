@@ -29,7 +29,7 @@ for **_frontend development_**
 +before running the application we have to create a database called dashboard in mySQL.
 ```
 1. if you want to use different database which already exist for you then change the database name in hibernate.cfg.xml file [click here](https://github.com/ravi115/DashBoardManagmentApp/blob/master/DashBoardManagementApp/src/hibernate.cfg.xml).
-update below property in hibernate.cfg.cml file.
+update below property in hibernate.cfg.xml file.
 ```diff
 <property name="connection.url">jdbc:mysql://localhost:3306/dashboard-name</property>
 ```
@@ -47,13 +47,16 @@ update the below property with your credentials: -
 ### To run this application follow these below steps.
 1. deploye the war file of this application on tomcat server.
 2. to download war file [click here](https://github.com/ravi115/DashBoardManagmentApp/blob/master/DashBoardManagementApp.war).
-3. once you successfuly deployed the war file hit this below link to perform your operation.
+3. once you successfully deployed the war file hit this below link to perform your operation.
   ```diff
 - http://localhost:8080/DashBoardManagementApp/index.html
 ```
 4. check your port in which tomcat is running. if it is not 8080 then change the port number in the above url.
 
-**NOTE: - _in this case your credential should be same with the credential used in this application and also database name should be same._**
+**NOTE: -**
+1. _in this case **your credential should be same with the credential used in this application** and also **database name should be same**._
+2. _before testing this application, **a internet connection must be required to see effect of bootstrap and jQuery features_**.
+3. the _UI of this application is tested on_ **google chrome only**. so make sure **this application should be tested on the chrome browser only**. 
 
 ### To test API of this application follow these below steps. 
 1. **To test GET API of this application: -**
