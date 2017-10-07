@@ -125,7 +125,7 @@ function creataTable(response) {
 			if(result.dateUpdated != null) {
 				tableData =  "<tr class="+ trStyle[j++]+ ">"+"<td>" + (i+1) + "</td><td>" + result.id + "</td><td>" + result.name + "</td><td>" + result.description + "</td><td>" + result.dateCreated + "</td><td>" + result.dateUpdated +  "</td></tr>";
 			}else{
-				tableData =  "<tr class="+ trStyle[j++]+ ">"+"<td>" + (i+1) + "</td><td>" + result.id + "</td><td>" + result.name + "</td><td>" + result.description + "</td><td>" + result.dateCreated +  "</td></tr>";
+				tableData =  "<tr class="+ trStyle[j++]+ ">"+"<td>" + (i+1) + "</td><td>" + result.id + "</td><td>" + result.name + "</td><td>" + result.description + "</td><td>" + result.dateCreated +  "</td><td>" + "&nbsp" + "</td></tr>";
 			}
 			
 			rows += tableData;
