@@ -119,9 +119,16 @@ function creataTable(response) {
 	var rows="";
 	if(resultJSON != null ) {
 		var j = 0;
+		var tableData='';
 		for(i = 0 ; i< resultJSON.length; i++ ) {
 			var result = resultJSON[i];
-			rows += "<tr class="+ trStyle[j++]+ ">"+"<td>" + (i+1) + "</td><td>" + result.id + "</td><td>" + result.name + "</td><td>" + result.description + "</td><td>" + result.dateCreated + "</td><td>" + result.dateUpdated +  "</td></tr>" ;
+			if(result.dateUpdated != null) {
+				tableData =  "<tr class="+ trStyle[j++]+ ">"+"<td>" + (i+1) + "</td><td>" + result.id + "</td><td>" + result.name + "</td><td>" + result.description + "</td><td>" + result.dateCreated + "</td><td>" + result.dateUpdated +  "</td></tr>";
+			}else{
+				tableData =  "<tr class="+ trStyle[j++]+ ">"+"<td>" + (i+1) + "</td><td>" + result.id + "</td><td>" + result.name + "</td><td>" + result.description + "</td><td>" + result.dateCreated +  "</td></tr>";
+			}
+			
+			rows += tableData;
 			if(j==4){
 				j=0;
 			}
