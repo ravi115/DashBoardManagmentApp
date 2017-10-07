@@ -51,8 +51,9 @@ update the below property with your credentials: -
   ```diff
 - http://localhost:8080/DashBoardManagementApp/index.html
 ```
-4. check you port in which tomcat is running. if it is not 8080 then change the port number in the above url.
-**NOTE: - _in this case your credential should be same as the credential used in this application and also database name should be same._
+4. check your port in which tomcat is running. if it is not 8080 then change the port number in the above url.
+
+**NOTE: - _in this case your credential should be same with the credential used in this application and also database name should be same._**
 
 ### To test API of this application follow these below steps. 
 1. **To test GET API of this application: -**
@@ -73,6 +74,11 @@ http://localhost:8080/DashBoardManagementApp/rest/resources/search?name=ravi
 To list down all user from database based on user description.
 ```diff
 http://localhost:8080/DashBoardManagementApp/rest/resources/search?description=i am an engineer!
+```
+To list down all user from database based on more than one condition.
+
+```diff
+http://localhost:8080/DashBoardManagementApp/rest/resources/search?id=1&description=i am an engineer!
 ```
 
 2. **To test POST API of this application:-**
@@ -112,4 +118,4 @@ description: i love singing. (optional)
 
 **Note: - search _doc folder_ to  get java document of this application**.
 
-========================================================= o End o ==================================================================
+========================== o End o ====================================
