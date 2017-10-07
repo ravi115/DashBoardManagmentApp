@@ -3,19 +3,18 @@ var rootURL = "http://localhost:8080/DashBoardManagementApp/rest/resources";
 console.log("ready!");
 loadUser();
 
-$('#ual').hide();
-$('#dal').hide();
-
 $('#userForm').submit(function() {
 		saveUSer();	
+		loadUser();
 });
 
 $('#updateForm').submit(function() {
 	updateUser();
+	loadUser();
 });
 $('#deleteForm').submit(function() {
-	//event.preventDefault();
 	deleteUser();
+	loadUser();
 });
 
 
@@ -43,10 +42,7 @@ function updateUser() {
 
 	var requestData = requestPayLoad($('#uid').val(), $('#uname').val(), $('#ucity').val());
 	var url = rootURL+'/update';
-	var statusCode = invokeAPI(url, 'PUT', "application/x-www-form-urlencoded; charset=UTF-8", requestData, 'text');
-	if(statusCode == 400 || statusCode == 404) {
-		$('#ual').show();
-	}	
+	invokeAPI(url, 'PUT', "application/x-www-form-urlencoded; charset=UTF-8", requestData, 'text');
 }
 
 function deleteUser() {
@@ -75,10 +71,7 @@ function deleteUser() {
 	}
 	console.log("delete data is : " + searchColumn);
 	var deleteURL = rootURL+'/remove';
-	var statusCode = invokeAPI(deleteURL, 'DELETE', "application/x-www-form-urlencoded; charset=UTF-8", searchColumn, 'text');
-	if(statusCode == 400 || statusCode == 404) {
-		$('#dal').show();
-	}
+	invokeAPI(deleteURL, 'DELETE', "application/x-www-form-urlencoded; charset=UTF-8", searchColumn, 'text');
 }
 
 /**
@@ -158,10 +151,10 @@ function invokeAPI(serverUrl, method, contentType, data, dataType) {
 		async:false,
 		statusCode: {
 			400: function (response) {
-				return 400;
+				//TODO: handle response code
 			},
 			404: function (response) {
-				return 404;
+				//TODO: handle response code
 			}
 		},
 		success: function(response) {
